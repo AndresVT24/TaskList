@@ -55,9 +55,9 @@
 				<h1>Home</h1>
 			</div>
 			<ul data-role="listview">
-				<li><a href="#page1">Page1</a></li>
-				<li><a href="#page2">Page2</a></li>
-				<li><a href="#page3">Page3</a></li>
+				<li>Page1<button class="delete">DELETE</button><a href="#page2"><button class="edit">EDITAR</button></a></li>
+				<li>Page2<button class="delete">DELETE</button><a href="#page2"><button class="edit">EDITAR</button></a></li>
+				<li>Page3<button class="delete">DELETE</button><a href="#page2"><button class="edit">EDITAR</button></a></li>
 			</ul>
 			<button id="addButton">AÑADIR</button>
 			<div data-role="footer" data-position="fixed">
@@ -94,7 +94,8 @@
 			</div>
 
 			<div class="ui-content">
-				<p>This is page 2</p>
+				<input type="text" class="edit">
+				<button>EDITAR</button>
 			</div><!-- end page 2 content -->
 
 			<div data-role="footer" data-position="fixed">

@@ -33,6 +33,24 @@ addButton.addEventListener("click",addText)
 
 function addText(){
     let text= prompt("QUE QUIERES AÑADIR?");
-    $("ul").append("<li><a>" + text + "</a></li>");
+    $("ul").append("<li>" + text + "<button class='delete'>DELETE</button><a href='#page2'><button class='edit'>EDITAR</button></li>");
     $("ul").listview("refresh");
+    $("ul li .delete").click(eliminar);
+    $("ul li .edit").click(eliminar);
+}
+
+
+$("ul li .delete").click(eliminar);
+$("ul li .edit").click(edit);
+
+function eliminar(event){
+    var evento =event.target || event.srcElement;
+    $text= $(this).parent("li");
+    texto= $text.get(0).value;
+    alert(texto);
+    $(evento).parent().remove();
+}
+
+function edit(event){
+    var edit= event.target || event.srcElement;
 }
