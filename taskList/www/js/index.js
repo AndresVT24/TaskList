@@ -31,26 +31,35 @@ function onDeviceReady() {
 let addButton= document.getElementById("addButton");
 addButton.addEventListener("click",addText)
 
+$("ul li").attr('id', '0');
+
+$("ul li .delete").click(eliminar);
+$(".ui-content button").click(editText);
+$("ul li .edit").click(edit);
+
+var toEditElement= null;
+
 function addText(){
     let text= prompt("QUE QUIERES AÑADIR?");
-    $("ul").append("<li>" + text + "<button class='delete'>DELETE</button><a href='#page2'><button class='edit'>EDITAR</button></li>");
+    $("ul").append("<li id='0'><h2>" + text + "</h2><button class='delete'>DELETE</button><a href='#page2'><button class='edit'>EDITAR</button></li>");
     $("ul").listview("refresh");
     $("ul li .delete").click(eliminar);
     $("ul li .edit").click(eliminar);
 }
 
-
-$("ul li .delete").click(eliminar);
-$("ul li .edit").click(edit);
-
 function eliminar(event){
     var evento =event.target || event.srcElement;
     $text= $(this).parent("li");
     texto= $text.get(0).value;
-    alert(texto);
     $(evento).parent().remove();
 }
 
 function edit(event){
-    var edit= event.target || event.srcElement;
+    toEditElement= $(event.target).parent().parent().children().first();
+    alert(toEditElement);
+}
+
+function editText(){
+    let textEdit= $(".ui-content .edit").val();
+    $(toEditElement).text(textEdit);
 }
