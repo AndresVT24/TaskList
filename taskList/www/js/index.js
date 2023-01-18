@@ -40,12 +40,13 @@ $("ul li .edit").click(edit);
 
 var toEditElement= null;
 var toListElement= null;
+var toTextELement= null;
 
 function memory(){
     let newList= JSON.parse(localStorage.getItem("taskList"));
     let contador= 0;
     newList.forEach(element => {
-        $("ul").append("<li id="+ contador +"><h2>" + element + "</h2><button class='delete' data-role='none'>DELETE</button><a href='#page2'><button class='edit' data-role='none'>EDITAR</button></li>");
+        $("ul").append("<li id="+ contador +"><h2>" + element + "</h2><button class='delete' data-role='none'>DELETE</button><button class='edit' data-role='none'>EDITAR</button></li>");
         contador++;
     });
 }
@@ -63,17 +64,11 @@ function addText(){
     memory();
     location.reload(); 
 
-    $("ul li .delete").click(eliminar);
-    $("ul li .edit").click(eliminar);
 }
 
 function eliminar(event){
     var evento =event.target || event.srcElement;
     console.log(evento);
-    //text= $(this).parent("li #id").attr("id").text();
-    //console.log(text);
-    //texto= $text.get(0).value;
-    //$(evento).parent().remove();
 }
 
 function eliminar2(event){
@@ -90,11 +85,17 @@ function eliminar2(event){
 }
 
 function edit(event){
-    toEditElement= $(event.target).parent().parent().children().first();
-    toListElement= $(event.target).parent().parent().attr("id");
+    location.href= '#page2'
+    toTextELement= $(event.target).parent();
+    toEditElement= $(event.target).parent().children().first();
+    toListElement= $(event.target).parent().attr("id");
+    var x= $(toTextELement).children().first().text();
+    $(".edit").val(x);
+
 }
 
 function editText(){
+    location.href= '#homePage';
     let newList= JSON.parse(localStorage.getItem("taskList"));
     let textEdit= $(".ui-content .edit").val();
     $(toEditElement).text(textEdit);
