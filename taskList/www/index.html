@@ -46,6 +46,27 @@
 				margin: 5px !important;
 				position: relative !important;
 		}
+
+		.delete{
+			padding: 10px;
+			border-radius: 10px;
+			background-color: black;
+			color: white;
+		}
+
+		.edit{
+			padding: 10px;
+			border-radius: 10px;
+			background-color: rgb(44, 44, 182);
+			color: white;
+		}
+
+		#addButton{
+			border-radius: 10px;
+			background-color: black;
+			color: white;
+		}
+
 		</style>
         <title>Hello World</title>
     </head>
@@ -54,12 +75,9 @@
 			<div data-role="header">
 				<h1>Home</h1>
 			</div>
-			<ul data-role="listview">
-				<li><h2>Page1</h2><button class="delete">DELETE</button><a href="#page2"><button class="edit">EDITAR</button></a></li>
-				<li><h2>Page2</h2><button class="delete">DELETE</button><a href="#page2"><button class="edit">EDITAR</button></a></li>
-				<li><h2>Page3</h2><button class="delete">DELETE</button><a href="#page2"><button class="edit">EDITAR</button></a></li>
-			</ul>
 			<button id="addButton">AÑADIR</button>
+			<ul data-role="listview">
+			</ul>
 			<div data-role="footer" data-position="fixed">
 				<h1>Home</h1>
 			</div><!-- /footer -->

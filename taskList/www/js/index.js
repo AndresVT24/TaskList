@@ -31,35 +31,74 @@ function onDeviceReady() {
 let addButton= document.getElementById("addButton");
 addButton.addEventListener("click",addText)
 
-$("ul li").attr('id', '0');
+$(document).ready(memory());
 
-$("ul li .delete").click(eliminar);
+$("ul li .delete").click(eliminar2);
 $(".ui-content button").click(editText);
 $("ul li .edit").click(edit);
 
+
 var toEditElement= null;
+var toListElement= null;
+
+function memory(){
+    let newList= JSON.parse(localStorage.getItem("taskList"));
+    let contador= 0;
+    newList.forEach(element => {
+        $("ul").append("<li id="+ contador +"><h2>" + element + "</h2><button class='delete' data-role='none'>DELETE</button><a href='#page2'><button class='edit' data-role='none'>EDITAR</button></li>");
+        contador++;
+    });
+}
 
 function addText(){
     let text= prompt("QUE QUIERES AÑADIR?");
-    $("ul").append("<li id='0'><h2>" + text + "</h2><button class='delete'>DELETE</button><a href='#page2'><button class='edit'>EDITAR</button></li>");
-    $("ul").listview("refresh");
+    if(localStorage.getItem("taskList")==null){
+        localStorage.setItem("taskList",JSON.stringify([text]));
+    }
+    else{
+        let list= JSON.parse(localStorage.getItem("taskList"));
+        list.push(text);
+        localStorage.setItem("taskList",JSON.stringify(list));
+    }
+    memory();
+    location.reload(); 
+
     $("ul li .delete").click(eliminar);
     $("ul li .edit").click(eliminar);
 }
 
 function eliminar(event){
     var evento =event.target || event.srcElement;
-    $text= $(this).parent("li");
-    texto= $text.get(0).value;
-    $(evento).parent().remove();
+    console.log(evento);
+    //text= $(this).parent("li #id").attr("id").text();
+    //console.log(text);
+    //texto= $text.get(0).value;
+    //$(evento).parent().remove();
+}
+
+function eliminar2(event){
+    let newList= JSON.parse(localStorage.getItem("taskList"));
+    var evento =event.target || event.srcElement;
+    var x= $(evento).parent().attr("id");
+    var y= $(evento).parent();
+    $(y).remove();
+    x= parseInt(x);
+    newList.splice(x,1);
+    localStorage.setItem("taskList",JSON.stringify(newList));
+    location.reload();
+
 }
 
 function edit(event){
     toEditElement= $(event.target).parent().parent().children().first();
-    alert(toEditElement);
+    toListElement= $(event.target).parent().parent().attr("id");
 }
 
 function editText(){
+    let newList= JSON.parse(localStorage.getItem("taskList"));
     let textEdit= $(".ui-content .edit").val();
     $(toEditElement).text(textEdit);
+    toListElement= parseInt(toListElement);
+    newList[toListElement]= textEdit;
+    localStorage.setItem("taskList",JSON.stringify(newList));
 }
